@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <!-- Add jquery script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        // Create html variables
+        let html;
+        // Run a function when the document gets ready
+        $(document).ready(function () {
+            // Create an ajax call and pass it an object containing url and success  
+            // url will be url to be called i.e path of proxy route
+            // success will be a function that takes one parameter i.e data
+            // inside success function store data in html variable and call display_html() function
+            $.ajax({
+                url: 'http://127.0.0.1:5000/proxy',
+                success: function (data) {
+                    html = data;
+                    display_html();
+                }
+            });
+        });
+
+        // Define a function display_html()
+        function display_html() {
+            //  Append html in the body
+            $("body").append(html);
+        }
+
+    </script>
+</head>
+
+<body>
+
+
+</body>
+
+</html>

